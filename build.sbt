@@ -4,7 +4,7 @@ name := "monkeyman"
 
 version := "0.2"
 
-scalaVersion := "2.9.2"
+scalaVersion := "2.10.0"
 
 libraryDependencies ++= Seq(
   "org.pegdown" % "pegdown" % "1.1.0",
@@ -13,8 +13,8 @@ libraryDependencies ++= Seq(
   "eu.medsea.mimeutil" % "mime-util" % "2.1.3" intransitive,
   "commons-io" % "commons-io" % "2.4",
   "org.joda" % "joda-convert" % "1.2",
-  "org.fusesource.scalate" % "scalate-core" % "1.5.2-scala_2.8.1",
-  "org.clapper" %% "argot" % "0.4",
+  "org.fusesource.scalate" % "scalate-core_2.10" % "1.6.1",
+  //"org.clapper" %% "argot" % "1.0", custom build, in lib
   "com.ibm.icu" % "icu4j" % "4.8.1.1",
   "ch.qos.logback" % "logback-core" % "1.0.0",
   "ch.qos.logback" % "logback-classic" % "1.0.0",
@@ -25,11 +25,13 @@ libraryDependencies ++= Seq(
 )
 
 resolvers ++= Seq(
+  "Local Maven Repository" at "file://"+Path.userHome.absolutePath+"/.ivy2/local",
   "java m2" at "http://download.java.net/maven/2",
   "snapshots" at "http://scala-tools.org/repo-snapshots",
   "releases"  at "http://scala-tools.org/repo-releases",
   "asusual" at "http://www.asual.com/maven/content/groups/public"
 )
+
 
 initialCommands in console := "import java.io._; import nl.flotsam.monkeyman._"
 
@@ -41,7 +43,8 @@ mainClass in (Compile, packageBin) := Some("nl.flotsam.monkeyman.Monkeyman")
 //
 //proguardOptions ++= List(keepMain("nl.flotsam.monkeyman.Monkeyman"), "-keepclasseswithmembers class org.pegdown.**", "-keepclasseswithmembers class org.parboiled.**")
 
-seq(assemblySettings: _*)
+//seq(assemblySettings: _*)
+assemblySettings
 
 mainClass in assembly := Some("nl.flotsam.monkeyman.Monkeyman")
 
